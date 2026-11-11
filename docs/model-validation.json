@@ -1,0 +1,28 @@
+[
+  {
+    "object": "Untold_Fold.001",
+    "vertices": 2008,
+    "welded_vertices": 1400,
+    "polygons": 2796,
+    "dimensions": [
+      0.6860270500183105,
+      0.02200004644691944,
+      1.0877397060394287
+    ],
+    "non_manifold_edges": 0,
+    "invalid_normals": 0
+  },
+  {
+    "object": "Untold_OpticalGlass.001",
+    "vertices": 5134,
+    "welded_vertices": 3640,
+    "polygons": 7276,
+    "dimensions": [
+      3.228008270263672,
+      0.4300001263618469,
+      3.168982982635498
+    ],
+    "non_manifold_edges": 0,
+    "invalid_normals": 0
+  }
+]

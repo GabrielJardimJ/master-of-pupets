@@ -1,0 +1,11 @@
+{
+  "name": "Untold",
+  "source": "https://design-system-untold.vercel.app/",
+  "decisions": [
+    "Manrope e tokens oficiais; componentes de formulário reutilizados da biblioteca local.",
+    "Glass meets Aurora solicitado: única cena WebGL, navegação e conteúdo editorial em português.",
+    "Pesquisa 21st indisponível: CLI requer autenticação; nenhum componente externo inventado.",
+    "Revisão 02: abertura só com GLB e aurora multicolorida; header compacto após a hero; processo com roda de palavras e expansão Cloud; referências Motion Primitives, Magic UI e Shape Magic adaptadas à marca.",
+    "Revisão 03 solicitada pelo usuário: liquid glass em cards, header, campos, ações e diálogos; tokens compartilhados para temas claro/escuro, brilho ao ponteiro, redução de blur no mobile e fallback para transparência reduzida."
+  ]
+}
