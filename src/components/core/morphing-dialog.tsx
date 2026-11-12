@@ -42,7 +42,7 @@ export function MorphingDialog({
           <span className="row-number">{number}</span>
           <span className="service-name">{title}</span>
           <span className="service-preview">{tags[0]}</span>
-          <span className="service-plus liquid-glass" aria-hidden="true">
+          <span className="service-plus" aria-hidden="true">
             +
           </span>
         </Dialog.Trigger>
@@ -71,7 +71,7 @@ export function MorphingDialog({
               </Dialog.Description>
               <ul className="morph-tags">
                 {tags.map((tag) => (
-                  <li className="liquid-glass" key={tag}>
+                  <li key={tag}>
                     {tag}
                   </li>
                 ))}

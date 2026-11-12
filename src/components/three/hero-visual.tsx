@@ -1,5 +1,6 @@
 "use client";
 import dynamic from "next/dynamic";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import {
   Component,
   useCallback,
@@ -28,6 +29,9 @@ export function HeroVisual() {
   const host = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
   const [compact, setCompact] = useState(false);
+  const [automatic, setAutomatic] = useState(false);
+  const reduced = useReducedMotion();
+  const supported = useRef<boolean | null>(null);
   const [visible, setVisible] = useState(true);
   const [paused, setPaused] = useState(false);
   const [ready, setReady] = useState(false);
@@ -37,28 +41,60 @@ export function HeroVisual() {
     setFailed(true);
     setEnabled(false);
   }, []);
+  const startScene = useCallback(() => {
+    if (supported.current === null) {
+      const probe = document.createElement("canvas");
+      const gl = probe.getContext("webgl2");
+      supported.current = !!gl;
+      gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    }
+    if (supported.current) {
+      setEnabled(true);
+      setPaused(false);
+    } else onFailure();
+  }, [onFailure]);
   useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const connection = (
-      navigator as Navigator & { connection?: { saveData?: boolean } }
-    ).connection;
-    const probe = document.createElement("canvas");
-    const gl = probe.getContext("webgl2");
-    const canRender =
-      !!gl && !connection?.saveData && (navigator.hardwareConcurrency || 4) > 2;
-    gl?.getExtension("WEBGL_lose_context")?.loseContext();
+    const small = matchMedia("(max-width: 767px)");
+    const touch = matchMedia("(pointer: coarse)");
+    const device = navigator as Navigator & {
+      deviceMemory?: number;
+      connection?: { saveData?: boolean; effectiveType?: string };
+    };
     const update = () => {
-      setEnabled(canRender && !query.matches);
-      setCompact(window.innerWidth < 768);
+      setCompact(small.matches || touch.matches);
+      const limited =
+        !!device.connection?.saveData ||
+        ["slow-2g", "2g"].includes(device.connection?.effectiveType || "") ||
+        (device.deviceMemory !== undefined && device.deviceMemory <= 4) ||
+        (device.hardwareConcurrency || 8) <= 4;
+      setAutomatic(!small.matches && !touch.matches && !limited);
     };
     update();
-    query.addEventListener("change", update);
-    window.addEventListener("resize", update);
+    small.addEventListener("change", update);
+    touch.addEventListener("change", update);
     return () => {
-      query.removeEventListener("change", update);
-      window.removeEventListener("resize", update);
+      small.removeEventListener("change", update);
+      touch.removeEventListener("change", update);
     };
   }, []);
+  useEffect(() => {
+    if (reduced) {
+      setEnabled(false);
+      setReady(false);
+      return;
+    }
+    if (!automatic || !visible || enabled || failed) return;
+    let idle: number | undefined;
+    const timer = setTimeout(() => {
+      if ("requestIdleCallback" in window)
+        idle = window.requestIdleCallback(startScene, { timeout: 1500 });
+      else startScene();
+    }, 300);
+    return () => {
+      clearTimeout(timer);
+      if (idle !== undefined) window.cancelIdleCallback(idle);
+    };
+  }, [automatic, visible, enabled, failed, reduced, startScene]);
   useEffect(() => {
     let inView = true;
     const update = () => setVisible(inView && !document.hidden);
@@ -81,18 +117,19 @@ export function HeroVisual() {
       className="hero-visual"
       ref={host}
       data-ready={enabled && ready && !failed}
+      data-activation={automatic ? "auto" : "manual"}
     >
       <picture>
         <source
           media="(max-width: 767px)"
-          srcSet="/models/untold-aurora-mobile.webp"
+          srcSet="/models/untold-lights-mobile.webp"
         />
         <img
           className="glass-fallback"
-          src="/models/untold-aurora-desktop.webp"
+          src="/models/untold-lights-desktop.webp"
           width="1440"
           height="900"
-          alt="Símbolo original da Untold esculpido em vidro óptico, no centro de uma aurora multicolorida"
+          alt="Símbolo original da Untold esculpido em vidro óptico, entre luzes abstratas em azul e violeta oficiais"
           fetchPriority="high"
         />
       </picture>
@@ -108,6 +145,21 @@ export function HeroVisual() {
         </SceneBoundary>
       )}
       <div className="scene-controls">
+        {!enabled && !reduced && !automatic && !failed && (
+          <button className="scene-activate liquid-glass" onClick={startScene}>
+            Ativar experiência 3D <span aria-hidden="true">↗</span>
+          </button>
+        )}
+        {enabled && !ready && !automatic && (
+          <span className="scene-loading" role="status">
+            Carregando experiência…
+          </span>
+        )}
+        {failed && (
+          <span className="scene-loading" role="status">
+            A prévia estática está disponível.
+          </span>
+        )}
         {enabled && ready && !failed && (
           <button
             className="motion-toggle liquid-glass"

@@ -1,0 +1,31 @@
+{
+  "scope": "Local static production export / Chromium / fresh context / 390x844 touch DPR2 / 3500ms after navigation / no server compression; not field Core Web Vitals",
+  "before": {
+    "viewport": "390x844 / touch / DPR 2",
+    "javascriptBytes": 1767126,
+    "javascriptRequests": 7,
+    "glbRequests": 1,
+    "canvasCount": 1,
+    "blurSurfaces": 53,
+    "overflow": false
+  },
+  "after": {
+    "viewport": "390x844 / touch / DPR 2",
+    "javascriptBytes": 714704,
+    "javascriptRequests": 6,
+    "glbRequests": 0,
+    "canvasCount": 0,
+    "blurSurfaces": 1,
+    "overflow": false
+  },
+  "initialJavascriptReductionPercent": 59.6,
+  "revision05": {
+    "viewport": "390x844 / touch / DPR 2",
+    "javascriptBytes": 712547,
+    "javascriptRequests": 6,
+    "glbRequests": 0,
+    "canvasCount": 0,
+    "blurSurfaces": 1,
+    "overflow": false
+  }
+}

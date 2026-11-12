@@ -17,6 +17,10 @@ test("immersive desktop: centered GLB, delayed header and clean console", async 
       failed.push(r.url());
   });
   await page.setViewportSize({ width: 1440, height: 900 });
+  await page.addInitScript(() => {
+    Object.defineProperty(navigator, "hardwareConcurrency", { get: () => 8 });
+    Object.defineProperty(navigator, "deviceMemory", { get: () => 8 });
+  });
   await page.goto("/");
   await expect(page.locator(".hero-visual")).toHaveAttribute(
     "data-ready",
@@ -156,6 +160,10 @@ test("scroll choreography: passing words then a fully light process section", as
       window.scrollTo({ top: top + travel * 0.35, behavior: "instant" }),
     dimensions,
   );
+  await expect(page.locator("#processo")).toHaveAttribute(
+    "data-scroll-driver",
+    "gsap",
+  );
   await page.waitForTimeout(250);
   const before = await page
     .locator(".process-word-track")
@@ -171,6 +179,16 @@ test("scroll choreography: passing words then a fully light process section", as
     .locator(".process-word-track")
     .evaluate((el) => getComputedStyle(el).transform);
   expect(after).not.toBe(before);
+  const alignment = await page.locator(".process-wheel").evaluate((el) => {
+    const wheel = el.getBoundingClientRect();
+    const last = el
+      .querySelector(".process-word-track")!
+      .lastElementChild!.getBoundingClientRect();
+    return Math.abs(
+      last.top + last.height / 2 - (wheel.top + wheel.height / 2),
+    );
+  });
+  expect(alignment).toBeLessThan(2);
   expect(
     await page
       .locator(".process-inner")
@@ -259,6 +277,8 @@ test("fallbacks: reduced motion, unsupported WebGL and mobile live sculpture", a
       });
     await page.goto("/");
     if (scenario === "live") {
+      await expect(page.locator("canvas")).toHaveCount(0);
+      await page.getByRole("button", { name: "Ativar experiência 3D" }).click();
       await expect(page.locator(".hero-visual")).toHaveAttribute(
         "data-ready",
         "true",
@@ -267,6 +287,10 @@ test("fallbacks: reduced motion, unsupported WebGL and mobile live sculpture", a
       await page.getByRole("button", { name: "Pausar animação" }).focus();
       await page.getByRole("button", { name: "Pausar animação" }).click();
     } else {
+      if (scenario === "no-webgl")
+        await page
+          .getByRole("button", { name: "Ativar experiência 3D" })
+          .click();
       await expect(page.locator(".hero-visual")).toHaveAttribute(
         "data-ready",
         "false",
@@ -323,4 +347,81 @@ test("accessible page and open dialog; selection preserved with standard cursor"
     404,
   );
   expect(errors).toEqual([]);
+});
+
+test("mobile budget: no WebGL or model before activation, quiet glass and official controls", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    viewport: { width: 390, height: 844 },
+    isMobile: true,
+    hasTouch: true,
+    deviceScaleFactor: 2,
+  });
+  const page = await context.newPage();
+  const errors: string[] = [];
+  page.on("pageerror", (error) => errors.push(error.message));
+  await page.goto("/");
+  await expect(
+    page.getByRole("button", { name: "Ativar experiência 3D" }),
+  ).toBeVisible();
+  await page.waitForTimeout(800);
+  await expect(page.locator("canvas")).toHaveCount(0);
+  expect(
+    await page.evaluate(() =>
+      performance
+        .getEntriesByType("resource")
+        .some((e) => e.name.endsWith(".glb")),
+    ),
+  ).toBe(false);
+  const blur = await page.evaluate(
+    () =>
+      [...document.querySelectorAll("*")].filter((el) => {
+        const value = getComputedStyle(el).backdropFilter;
+        return value && value !== "none";
+      }).length,
+  );
+  expect(blur).toBeLessThanOrEqual(3);
+  await expect(page.locator("#processo")).toHaveClass(/process-reduced/);
+  await page.locator("#contato").scrollIntoViewIfNeeded();
+  expect(
+    await page
+      .locator("#contact-name")
+      .evaluate((el) => el.getBoundingClientRect().height),
+  ).toBe(44);
+  expect(
+    await page
+      .locator('label[for="contact-name"]')
+      .evaluate((el) => getComputedStyle(el).fontSize),
+  ).toBe("14px");
+  expect(errors).toEqual([]);
+  await context.close();
+});
+
+test("project lighting and depth are scoped, keyboard-safe and disabled on touch", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto("/");
+  await page.locator("#projetos").scrollIntoViewIfNeeded();
+  const card = page.locator(".projects-empty-card");
+  await expect(card).toHaveAttribute("data-interactive", "true");
+  const box = (await card.boundingBox())!;
+  await page.mouse.move(box.x + box.width * 0.8, box.y + box.height * 0.25);
+  await page.waitForTimeout(200);
+  expect(await card.getAttribute("style")).toContain("rotate");
+  expect(
+    await page
+      .locator(".magic-card-light")
+      .evaluate((el) => Number(getComputedStyle(el).opacity)),
+  ).toBeGreaterThan(0.05);
+  await page.screenshot({ path: "docs/screenshots/project-lighting-1440.png" });
+  await card.getByRole("link", { name: "Vamos criar o próximo?" }).focus();
+  await expect(
+    card.getByRole("link", { name: "Vamos criar o próximo?" }),
+  ).toBeFocused();
+  await page.setViewportSize({ width: 390, height: 844 });
+  await expect(card).toHaveAttribute("data-interactive", "false");
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await expect(page.locator(".magic-card-light")).toBeHidden();
 });

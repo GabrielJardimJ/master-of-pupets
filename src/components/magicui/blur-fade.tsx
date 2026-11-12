@@ -1,5 +1,6 @@
 "use client";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { useCompactLayout } from "@/hooks/use-compact-layout";
 // Magic UI BlurFade, adapted for reduced motion. See docs/animation-sources.md.
 
 import { useRef } from "react";
@@ -46,7 +47,9 @@ export function BlurFade({
   blur = "6px",
   ...props
 }: BlurFadeProps) {
-  const reduced = useReducedMotion();
+  const preference = useReducedMotion();
+  const compact = useCompactLayout();
+  const reduced = preference || compact;
   const ref = useRef(null);
   const inViewResult = useInView(ref, { once: true, margin: inViewMargin });
   const isInView = !inView || inViewResult;

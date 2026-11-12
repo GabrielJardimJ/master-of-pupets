@@ -1,0 +1,113 @@
+/* A single editorial motion language; the brand tokens remain authoritative. */
+.manifesto-heading .headline-line {
+  display: block;
+  color: inherit;
+}
+.manifesto-heading .headline-line > span:not(.sr-only) {
+  color: inherit;
+}
+.manifesto-heading .headline-line:last-child > .word-mask:last-child,
+.manifesto-heading .headline-line:last-child > span:not(.word-mask):last-child {
+  color: var(--primary);
+}
+.word-mask {
+  overflow: hidden;
+  vertical-align: bottom;
+}
+.magic-card {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid transparent;
+  border-radius: var(--shape-card);
+  transform-style: preserve-3d;
+  overflow: hidden;
+  transition: box-shadow var(--motion-normal) var(--ease);
+}
+.magic-card-base {
+  position: absolute;
+  inset: 0;
+  background: var(--card);
+  border-radius: inherit;
+  z-index: -1;
+}
+.magic-card-light {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  border-radius: inherit;
+}
+.magic-card-content {
+  position: relative;
+  z-index: 1;
+  transform: translateZ(0);
+}
+.magic-card:focus-within {
+  outline: 2px solid var(--ring);
+  outline-offset: 3px;
+}
+.magic-card[data-interactive="true"]:hover {
+  box-shadow: 0 16px 40px color-mix(in srgb, var(--brand-ink) 22%, transparent);
+}
+.magic-card[data-interactive="false"] {
+  transform: none !important;
+  background: var(--card) !important;
+  border-color: var(--border);
+}
+.magic-card[data-interactive="false"] .magic-card-light {
+  display: none;
+}
+.magic-card .projects-empty {
+  background: transparent;
+  grid-template-columns: 1fr;
+  padding: var(--space-48);
+  min-height: 240px;
+}
+.magic-card .project-item {
+  display: block;
+  padding: var(--space-16);
+  margin: 0;
+}
+.magic-card .project-image {
+  border-radius: var(--shape-control);
+  overflow: hidden;
+}
+.project-card:nth-child(even) {
+  margin-top: var(--space-96);
+}
+.projects-empty-card .projects-empty h3 {
+  font-size: var(--type-title);
+  max-width: 520px;
+}
+.projects-empty-card .eyebrow {
+  display: none;
+}
+.process-inner {
+  color: var(--brand-ink);
+}
+.process-word-track {
+  transform: translateY(-3.6em);
+}
+@media (max-width: 767px) {
+  .magic-card .projects-empty {
+    padding: var(--space-24);
+    min-height: 0;
+  }
+  .project-card:nth-child(even) {
+    margin-top: 0;
+  }
+  .magic-card {
+    transform: none !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .magic-card {
+    transform: none !important;
+  }
+  .magic-card-light {
+    display: none;
+  }
+  .word-mask {
+    overflow: visible;
+  }
+}

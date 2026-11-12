@@ -1,4 +1,3 @@
-import { GlassLighting } from "@/components/glass-lighting";
 import { Technologies } from "@/components/sections/technologies";
 import { Process } from "@/components/sections/process";
 import { Header } from "@/components/header";
@@ -15,7 +14,6 @@ export default function Home() {
       <a href="#manifesto" className="skip-link">
         Pular para o conteúdo
       </a>
-      <GlassLighting />
       <Header />
       <main id="conteudo" tabIndex={-1}>
         <Hero />

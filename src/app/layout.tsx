@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import "@fontsource-variable/manrope";
 import "./globals.css";
 import "@/styles/liquid-glass.css";
+import "@/styles/motion.css";
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl || "http://localhost:3000"),

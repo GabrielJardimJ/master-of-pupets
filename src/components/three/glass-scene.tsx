@@ -8,24 +8,66 @@ import {
   useGLTF,
 } from "@react-three/drei";
 import * as THREE from "three";
-import { auroraVertex, auroraFragment } from "./aurora-shader";
-function FrameScheduler({ active }: { active: boolean }) {
+import { colorBendsVertex, colorBendsFragment } from "./color-bends-shader";
+import tokens from "@/styles/tokens.json";
+function FrameScheduler({
+  active,
+  compact,
+}: {
+  active: boolean;
+  compact: boolean;
+}) {
   const invalidate = useThree((s) => s.invalidate);
   useEffect(() => {
     if (!active) return;
     invalidate();
-    const timer = setInterval(invalidate, 1000 / 30);
+    const timer = setInterval(invalidate, 1000 / (compact ? 20 : 30));
     return () => clearInterval(timer);
-  }, [active, invalidate]);
+  }, [active, compact, invalidate]);
   return null;
 }
-function Aurora({ moving }: { moving: boolean }) {
+function BrandLights({
+  moving,
+  compact,
+}: {
+  moving: boolean;
+  compact: boolean;
+}) {
   const material = useRef<THREE.ShaderMaterial>(null);
   const { viewport, size, gl } = useThree();
   const uniforms = useMemo(
     () => ({
       uTime: { value: 5 },
-      uAspect: { value: 1 },
+      uCanvas: { value: new THREE.Vector2(1, 1) },
+      uSpeed: { value: 0.12 },
+      uRot: { value: new THREE.Vector2(Math.cos(0.5), Math.sin(0.5)) },
+      uColorCount: { value: 2 },
+      uColors: {
+        value: [
+          tokens.primitive.electric,
+          tokens.primitive.violet,
+          ...Array(6).fill("#000000"),
+        ].map(
+          (hex) =>
+            new THREE.Vector3(
+              parseInt(hex.slice(1, 3), 16) / 255,
+              parseInt(hex.slice(3, 5), 16) / 255,
+              parseInt(hex.slice(5, 7), 16) / 255,
+            ),
+        ),
+      },
+      uInk: { value: new THREE.Vector3(16 / 255, 17 / 255, 26 / 255) },
+      uTransparent: { value: 0 },
+      uScale: { value: 1.2 },
+      uFrequency: { value: 1.1 },
+      uWarpStrength: { value: 0.75 },
+      uPointer: { value: new THREE.Vector2() },
+      uMouseInfluence: { value: 0 },
+      uParallax: { value: 0 },
+      uNoise: { value: 0 },
+      uIterations: { value: compact ? 1 : 2 },
+      uIntensity: { value: 1.05 },
+      uBandWidth: { value: 5 },
       uResolution: { value: new THREE.Vector2(1, 1) },
     }),
     [],
@@ -33,7 +75,8 @@ function Aurora({ moving }: { moving: boolean }) {
   useFrame((_, delta) => {
     if (material.current) {
       if (moving) uniforms.uTime.value += Math.min(delta, 0.05);
-      uniforms.uAspect.value = size.width / size.height;
+      uniforms.uIterations.value = compact ? 1 : 2;
+      uniforms.uCanvas.value.set(size.width, size.height);
       uniforms.uResolution.value.set(
         size.width * gl.getPixelRatio(),
         size.height * gl.getPixelRatio(),
@@ -55,8 +98,8 @@ function Aurora({ moving }: { moving: boolean }) {
       <planeGeometry args={[1, 1]} />
       <shaderMaterial
         ref={material}
-        vertexShader={auroraVertex}
-        fragmentShader={auroraFragment}
+        vertexShader={colorBendsVertex}
+        fragmentShader={colorBendsFragment}
         uniforms={uniforms}
         depthWrite={false}
       />
@@ -182,8 +225,8 @@ function GlassLogo({
             distortion={0.07}
             distortionScale={0.16}
             temporalDistortion={0}
-            samples={compact ? 3 : 5}
-            resolution={compact ? 256 : 512}
+            samples={compact ? 2 : 5}
+            resolution={compact ? 192 : 512}
             color={mesh.name.includes("Fold") ? "#b8a8ed" : "#e3ebff"}
             envMapIntensity={1.7}
             clearcoat={1}
@@ -210,7 +253,7 @@ export default function GlassScene({
   return (
     <Canvas
       frameloop={active ? "demand" : "never"}
-      dpr={[1, compact ? 1.25 : 1.5]}
+      dpr={[1, compact ? 1 : 1.5]}
       camera={{ position: [0, 0, 8.7], fov: 32 }}
       gl={{ antialias: !compact, alpha: true, powerPreference: "low-power" }}
       onCreated={({ gl }) => {
@@ -221,13 +264,13 @@ export default function GlassScene({
       style={{ pointerEvents: "none" }}
       aria-hidden="true"
     >
-      <FrameScheduler active={active} />
+      <FrameScheduler active={active} compact={compact} />
       <color attach="background" args={["#10111A"]} />
       <ambientLight intensity={0.4} />
       <directionalLight position={[-3, 4, 5]} intensity={3} color="#dce8ff" />
-      <Aurora moving={moving} />
+      <BrandLights moving={moving} compact={compact} />
       <Suspense fallback={null}>
-        <Environment resolution={128} frames={1}>
+        <Environment resolution={compact ? 64 : 128} frames={1}>
           <Lightformer
             intensity={0.35}
             position={[0, 0, 5]}

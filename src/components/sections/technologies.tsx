@@ -25,7 +25,7 @@ export function Technologies() {
     >
       <div className="tech-heading">
         <h2 id="tech-title">
-          As ferramentas. <span>As possibilidades.</span>
+          Tecnologias
         </h2>
         <button
           className="tech-pause liquid-glass"
@@ -38,7 +38,7 @@ export function Technologies() {
       </div>
       <InfiniteSlider speed={45} speedOnHover={20} gap={64} paused={paused}>
         {technologies.map(([slug, name]) => (
-          <div className="technology-logo liquid-glass" key={slug}>
+          <div className="technology-logo" key={slug}>
             <img
               src={`/technologies/${slug}.svg`}
               alt={name}

@@ -1,12 +1,7 @@
 "use client";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 // Motion Primitives InfiniteSlider pattern, with native measurement and accessible copies.
-import {
-  motion,
-  useAnimationFrame,
-  useMotionValue,
-  useInView,
-} from "motion/react";
+import { motion, useMotionValue, useInView } from "motion/react";
 import { useEffect, useRef, useState, type ReactNode } from "react";
 export function InfiniteSlider({
   children,
@@ -46,15 +41,30 @@ export function InfiniteSlider({
     measure();
     return () => observer.disconnect();
   }, [gap]);
-  useAnimationFrame((_, delta) => {
-    if (reduced || paused || hidden || !inView || !width.current) return;
-    const target = hover.current ? speedOnHover : speed;
-    current.current += (target - current.current) * Math.min(delta / 180, 1);
-    position.current =
-      (position.current + (Math.min(delta, 50) * current.current) / 1000) %
-      width.current;
-    translation.set(-position.current);
-  });
+  useEffect(() => {
+    if (reduced || paused || hidden || !inView) return;
+    let frame = 0,
+      last = 0;
+    const tick = (time: number) => {
+      frame = requestAnimationFrame(tick);
+      if (!last) {
+        last = time;
+        return;
+      }
+      const elapsed = time - last;
+      if (elapsed < 1000 / 30) return;
+      last = time;
+      if (!width.current) return;
+      const delta = Math.min(elapsed, 50);
+      const target = hover.current ? speedOnHover : speed;
+      current.current += (target - current.current) * Math.min(delta / 180, 1);
+      position.current =
+        (position.current + (delta * current.current) / 1000) % width.current;
+      translation.set(-position.current);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [reduced, paused, hidden, inView, speed, speedOnHover, translation]);
   return (
     <div
       className={`infinite-slider ${reduced ? "slider-static" : ""}`}

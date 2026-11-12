@@ -1,71 +1,109 @@
 "use client";
+import { useEffect, useRef } from "react";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { useRef } from "react";
-import {
-  motion,
-  useScroll,
-  useTransform,
-  type MotionValue,
-} from "motion/react";
+import { useCompactLayout } from "@/hooks/use-compact-layout";
 import tokens from "@/styles/tokens.json";
 import { process } from "@/content/site";
 const words = ["cada ideia.", "cada escolha.", "cada detalhe.", "cada etapa."];
-function ProcessWord({
-  word,
-  index,
-  progress,
-}: {
-  word: string;
-  index: number;
-  progress: MotionValue<number>;
-}) {
-  const opacity = useTransform(progress, (p) =>
-    Math.max(0.12, 1 - Math.abs(Math.min(p / 0.62, 1) * 3 - index) * 0.8),
+function Steps() {
+  return (
+    <ol className="process-list">
+      {process.map((step, i) => (
+        <li key={step.title}>
+          <span className="process-number">0{i + 1}</span>
+          <h3>{step.title}</h3>
+          <p>{step.text}</p>
+        </li>
+      ))}
+    </ol>
   );
-  return <motion.span style={{ opacity }}>{word}</motion.span>;
 }
-export function Process() {
-  const ref = useRef<HTMLElement>(null),
-    reduced = useReducedMotion();
-  const { scrollYProgress } = useScroll({
-    target: ref,
-    offset: ["start start", "end end"],
-  });
-  const y = useTransform(
-    scrollYProgress,
-    [0, 0.62, 1],
-    ["0em", "-3.6em", "-3.6em"],
-  );
-  const circle = useTransform(
-    scrollYProgress,
-    [0.62, 0.86],
-    ["circle(0% at 50% 50%)", "circle(150% at 50% 50%)"],
-  );
-  const ink = useTransform(
-    scrollYProgress,
-    [0.67, 0.83],
-    [tokens.primitive.cloud, tokens.primitive.ink],
-  );
-  const stepsOpacity = useTransform(scrollYProgress, [0.8, 0.94], [0, 1]);
-  const stepsY = useTransform(scrollYProgress, [0.8, 0.94], [24, 0]);
+function AnimatedProcess() {
+  const ref = useRef<HTMLElement>(null);
+  useEffect(() => {
+    const root = ref.current;
+    if (!root) return;
+    let disposed = false,
+      started = false,
+      cleanup: undefined | (() => void);
+    const setup = async () => {
+      if (started) return;
+      started = true;
+      try {
+        const [{ gsap }, { ScrollTrigger }] = await Promise.all([
+          import("gsap"),
+          import("gsap/ScrollTrigger"),
+        ]);
+        if (disposed) return;
+        gsap.registerPlugin(ScrollTrigger);
+        const context = gsap.context(() => {
+          const track = root.querySelector(".process-word-track");
+          const white = root.querySelector(".process-white");
+          const inner = root.querySelector(".process-inner");
+          const details = root.querySelector(".process-details");
+          gsap.set(track, { y: 0, yPercent: 0 });
+          gsap.set(white, { clipPath: "circle(0% at 50% 50%)" });
+          gsap.set(inner, { color: tokens.primitive.cloud });
+          gsap.set(details, { opacity: 0, y: 24 });
+          const timeline = gsap.timeline({
+            defaults: { ease: "none" },
+            scrollTrigger: {
+              trigger: root,
+              start: "top top",
+              end: "bottom bottom",
+              scrub: true,
+              invalidateOnRefresh: true,
+            },
+          });
+          timeline
+            .to(track, { yPercent: -75, duration: 0.62 }, 0)
+            .to(
+              white,
+              { clipPath: "circle(150% at 50% 50%)", duration: 0.24 },
+              0.62,
+            )
+            .to(inner, { color: tokens.primitive.ink, duration: 0.16 }, 0.67)
+            .to(details, { opacity: 1, y: 0, duration: 0.14 }, 0.8)
+            .to({}, { duration: 0.06 }, 0.94);
+          timeline.scrollTrigger?.refresh();
+          timeline.scrollTrigger?.update();
+        }, root);
+        root.dataset.scrollDriver = "gsap";
+        cleanup = () => {
+          context.revert();
+          delete root.dataset.scrollDriver;
+        };
+      } catch {
+        root.dataset.scrollDriver = "static";
+      }
+    };
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          observer.disconnect();
+          void setup();
+        }
+      },
+      { rootMargin: "500px" },
+    );
+    observer.observe(root);
+    return () => {
+      disposed = true;
+      observer.disconnect();
+      cleanup?.();
+    };
+  }, []);
   return (
     <section
       ref={ref}
       id="processo"
-      className={`process-chapter ${reduced ? "process-reduced" : ""}`}
+      className="process-chapter"
       aria-labelledby="process-title"
       tabIndex={-1}
     >
       <div className="process-stage">
-        <motion.div
-          className="process-white"
-          style={{ clipPath: reduced ? "none" : circle }}
-          aria-hidden="true"
-        />
-        <motion.div
-          className="process-inner"
-          style={{ color: reduced ? tokens.primitive.ink : ink }}
-        >
+        <div className="process-white" aria-hidden="true" />
+        <div className="process-inner">
           <div className="section-label">
             <span>04 / Da ideia à experiência</span>
             <span>Uma construção em conjunto.</span>
@@ -74,48 +112,52 @@ export function Process() {
             <span>Clareza em</span>
             <span className="sr-only">cada etapa.</span>
             <span className="process-wheel" aria-hidden="true">
-              {reduced ? (
-                <span>cada etapa.</span>
-              ) : (
-                <motion.span className="process-word-track" style={{ y }}>
-                  {words.map((word, index) => (
-                    <ProcessWord
-                      word={word}
-                      index={index}
-                      progress={scrollYProgress}
-                      key={word}
-                    />
-                  ))}
-                </motion.span>
-              )}
+              <span className="process-word-track">
+                {words.map((word) => (
+                  <span key={word}>{word}</span>
+                ))}
+              </span>
             </span>
           </h2>
-          <motion.div
-            className="process-details"
-            style={{
-              opacity: reduced ? 1 : stepsOpacity,
-              y: reduced ? 0 : stepsY,
-            }}
-          >
+          <div className="process-details">
             <p className="process-intro">
               Uma direção para tirar ideias do papel. O caminho de cada projeto
               é definido junto com você.
             </p>
-            <ol className="process-list">
-              {process.map((step, i) => (
-                <li className="liquid-glass" key={step.title}>
-                  <span className="process-number">
-                    0{i + 1}
-                    <span aria-hidden="true">↗</span>
-                  </span>
-                  <h3>{step.title}</h3>
-                  <p>{step.text}</p>
-                </li>
-              ))}
-            </ol>
-          </motion.div>
-        </motion.div>
+            <Steps />
+          </div>
+        </div>
       </div>
     </section>
   );
+}
+function StaticProcess() {
+  return (
+    <section
+      id="processo"
+      className="process-chapter process-reduced"
+      data-theme="light"
+      aria-labelledby="process-title"
+      tabIndex={-1}
+    >
+      <div className="process-stage">
+        <div className="process-inner">
+          <div className="section-label">
+            <span>04 / Da ideia à experiência</span>
+          </div>
+          <h2 id="process-title" className="process-wheel-title">
+            Clareza em cada etapa.
+          </h2>
+          <div className="process-details">
+            <Steps />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+export function Process() {
+  const compact = useCompactLayout(),
+    reduced = useReducedMotion();
+  return compact || reduced ? <StaticProcess /> : <AnimatedProcess />;
 }

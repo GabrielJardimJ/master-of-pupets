@@ -6,6 +6,8 @@
     "Glass meets Aurora solicitado: única cena WebGL, navegação e conteúdo editorial em português.",
     "Pesquisa 21st indisponível: CLI requer autenticação; nenhum componente externo inventado.",
     "Revisão 02: abertura só com GLB e aurora multicolorida; header compacto após a hero; processo com roda de palavras e expansão Cloud; referências Motion Primitives, Magic UI e Shape Magic adaptadas à marca.",
-    "Revisão 03 solicitada pelo usuário: liquid glass em cards, header, campos, ações e diálogos; tokens compartilhados para temas claro/escuro, brilho ao ponteiro, redução de blur no mobile e fallback para transparência reduzida."
+    "Revisão 03 solicitada pelo usuário: liquid glass em cards, header, campos, ações e diálogos; tokens compartilhados para temas claro/escuro, brilho ao ponteiro, redução de blur no mobile e fallback para transparência reduzida.",
+    "Revisão 04: minimalismo editorial com liquid glass restrito a painéis principais; escala oficial de UI gerada de tokens.json; mobile usa poster com 3D sob demanda, processo estático, sem blur aninhado e sem loop do slider fora de vista.",
+    "Revisão 05 confirmada: retirar aurora; Color Bends em azul/violeta na mesma cena da refração, MagicCard discreto, TextEffect no manifesto e GSAP/ScrollTrigger no processo desktop. Mobile mantém poster e efeitos estáticos."
   ]
 }

@@ -1,3 +1,4 @@
+import { ManifestoHeading } from "../core/manifesto-heading";
 export function Manifesto() {
   return (
     <section
@@ -11,12 +12,8 @@ export function Manifesto() {
         <span>01 / Nossa essência</span>
         <span>Ideias merecem uma forma própria.</span>
       </div>
-      <h2 id="manifesto-title">
-        A web tem espaço
-        <br />
-        para o <span>inesperado.</span>
-      </h2>
-      <div className="manifesto-bottom liquid-glass">
+      <ManifestoHeading />
+      <div className="manifesto-bottom">
         <div className="manifesto-symbol">
           <img
             src="/brand/symbol.svg"

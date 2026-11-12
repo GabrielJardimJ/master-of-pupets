@@ -44,7 +44,7 @@ export function Contact() {
             <br />
             Vamos dar uma forma a essa ideia.
           </p>
-          <div className="contact-status liquid-glass">
+          <div className="contact-status">
             <span className="status-line" />O envio ainda não está disponível.
             Você já pode preparar e baixar seu briefing, sem enviar dados.
           </div>

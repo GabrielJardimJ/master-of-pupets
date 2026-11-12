@@ -9,7 +9,9 @@
     "typecheck": "tsc --noEmit",
     "test": "playwright test",
     "model": "blender --background --python scripts/create-logo.py",
-    "assets:brand": "node scripts/prepare-brand.mjs"
+    "assets:brand": "node scripts/prepare-brand.mjs",
+    "tokens:ui": "node scripts/sync-ui-tokens.mjs",
+    "measure:mobile": "node scripts/measure-mobile.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.0.0",
@@ -19,6 +21,7 @@
     "@tailwindcss/postcss": "^4.1.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.5.2",
+    "gsap": "^3.15.1",
     "motion": "^14.12.0",
     "next": "^16.0.0",
     "react": "^19.2.0",

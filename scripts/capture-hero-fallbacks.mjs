@@ -1,4 +1,4 @@
-// Capture the shipped scene rather than approximating the new aurora in a raster editor.
+// Capture the shipped Color Bends + GLB scene for lightweight static fallbacks.
 import { chromium } from "@playwright/test";
 import sharp from "sharp";
 const browser = await chromium.launch({
@@ -20,6 +20,8 @@ try {
       reducedMotion: "no-preference",
     });
     await page.goto(process.env.PREVIEW_URL || "http://localhost:3000/");
+    if (name === "mobile")
+      await page.getByRole("button", { name: "Ativar experiência 3D" }).click();
     await page
       .locator(".hero-visual[data-ready=true]")
       .waitFor({ timeout: 30000 });
@@ -31,7 +33,7 @@ try {
     const buffer = await page.locator("canvas").screenshot();
     await sharp(buffer)
       .webp({ quality: 88 })
-      .toFile(`public/models/untold-aurora-${name}.webp`);
+      .toFile(`public/models/untold-lights-${name}.webp`);
     await page.close();
     console.log(`Captured ${name}: ${width}x${height}`);
   }

@@ -2,7 +2,7 @@ import { navigation } from "@/content/site";
 export function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-top liquid-glass">
+      <div className="footer-top">
         <a
           className="brand-link"
           href="#inicio"
