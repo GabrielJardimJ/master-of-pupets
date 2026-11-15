@@ -1,0 +1,11 @@
+{
+ "page": "dist/index.html",
+ "url": null,
+ "root": "dist",
+ "kind": "service",
+ "category": "design e desenvolvimento de sites",
+ "primary": "Conte sua ideia",
+ "rounds": 3,
+ "start": "2026-11-15T10:53:26.085Z",
+ "by": "gate.mjs --start"
+}

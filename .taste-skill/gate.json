@@ -1,0 +1,1267 @@
+{
+ "start": "2026-11-15T10:53:26.085Z",
+ "round": 3,
+ "idle": 0,
+ "errors": 0,
+ "status": "open",
+ "history": [
+  {
+   "at": "2026-11-15T11:45:27.021Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 21,
+   "round": 1,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-15T11:53:13.794Z",
+   "mode": "manual",
+   "status": "fail",
+   "fails": 14,
+   "round": 2,
+   "reused": false,
+   "stopHookActive": false
+  },
+  {
+   "at": "2026-11-15T11:56:52.205Z",
+   "mode": "manual",
+   "status": "open",
+   "fails": 26,
+   "round": 3,
+   "reused": false,
+   "stopHookActive": false
+  }
+ ],
+ "max": 3,
+ "marker": {
+  "page": "dist/index.html",
+  "url": null,
+  "root": "dist",
+  "kind": "service",
+  "category": "design e desenvolvimento de sites",
+  "primary": "Conte sua ideia",
+  "rounds": 3,
+  "start": "2026-11-15T10:53:26.085Z",
+  "by": "gate.mjs --start"
+ },
+ "manual": true,
+ "roundKey": "af245ca1a259041c:96e77719",
+ "roundFree": false,
+ "idleFree": false,
+ "blockKey": null,
+ "fp": "af245ca1a259041c",
+ "page": "dist/index.html",
+ "found": {
+  "fails": [
+   {
+    "check": "shader-lint",
+    "where": "assets/chunk-WACE3XCP.js \"sampler3D\"",
+    "msg": "a shader uses \"sampler3D\" as a name (line 2: uniform highp sampler3D probesSH[ NUM_LIGHT_PROBE_GRIDS ];): GLSL ES reserves it, so a strict GPU rejects the whole shader and the picture stays empty",
+    "fix": "rename it (flat, smooth, centroid, sample, patch, input, output, filter and the rest are GLSL ES reserved words)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "shader-lint"
+    ],
+    "wheres": [
+     "assets/chunk-WACE3XCP.js \"sampler3D\""
+    ]
+   },
+   {
+    "check": "shader-lint",
+    "where": "assets/chunk-WACE3XCP.js \"sampler2DShadow\"",
+    "msg": "a shader uses \"sampler2DShadow\" as a name (line 11: uniform sampler2DShadow sunShadowMap[ NUM_SUN_LIGHT_SHADOWS ];): GLSL ES reserves it, so a strict GPU rejects the whole shader and the picture stays empty",
+    "fix": "rename it (flat, smooth, centroid, sample, patch, input, output, filter and the rest are GLSL ES reserved words)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "shader-lint"
+    ],
+    "wheres": [
+     "assets/chunk-WACE3XCP.js \"sampler2DShadow\""
+    ]
+   },
+   {
+    "check": "shader-lint",
+    "where": "assets/chunk-WACE3XCP.js \"common\"",
+    "msg": "a shader uses \"common\" as a name (line 2: #include <common>): GLSL ES reserves it, so a strict GPU rejects the whole shader and the picture stays empty",
+    "fix": "rename it (flat, smooth, centroid, sample, patch, input, output, filter and the rest are GLSL ES reserved words)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "shader-lint"
+    ],
+    "wheres": [
+     "assets/chunk-WACE3XCP.js \"common\""
+    ]
+   },
+   {
+    "check": "no-visual",
+    "where": "section#estudio \"Uma presença com a sua assinatura.\"",
+    "msg": "no picture, effect or mock in this section; a feature section needs a visual",
+    "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency",
+    "ids": [
+     "no-visual"
+    ],
+    "wheres": [
+     "section#estudio \"Uma presença com a sua assinatura.\""
+    ]
+   },
+   {
+    "check": "copy-fact",
+    "where": "h1#hero-h \"Sites para o seu próximo capítulo.\"",
+    "msg": "the first screen holds no number, price, date, place, platform or genre",
+    "fix": "put one hard fact from the brief on the first screen: a number, a price, a date, the place, the platforms it runs on or a game's genre; take it from the brief or remove the claim",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "copy-fact"
+    ],
+    "wheres": [
+     "h1#hero-h \"Sites para o seu próximo capítulo.\""
+    ]
+   },
+   {
+    "check": "copy-headings",
+    "where": "h2#studio-h \"Uma presença com a sua assinatura.\"",
+    "msg": "\"Uma presença com a sua assinatura.\" names no product, part, place or section (6 headings like it; at most one brand line per page) (and 5 more like it: \"Experiências interativas\", \"Nosso laboratório digita\", \"Da ideia ao ar.\", \"Direção\", ...)",
+    "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "copy-headings"
+    ],
+    "wheres": [
+     "h2#studio-h \"Uma presença com a sua assinatura.\""
+    ]
+   },
+   {
+    "check": "phone-number",
+    "where": "div.wrap > div.contact-top > div.contact-aside > a.contact-direct \"https://wa.me/5528920036176?text=Ol%C3%A\"",
+    "msg": "a WhatsApp link calls a number in a real dialable format: \"https://wa.me/5528920036176?text=Ol%C3%A\"; a visitor can dial it and reach a stranger (and 1 more like it: div.wrap > div.footer-bottom > nav.footer-socials > a:nth-of-type(3))",
+    "fix": "drop the number and its tel: link (a \"Request a call\" form may stand in), unless the brief gives the number",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "phone-number"
+    ],
+    "wheres": [
+     "div.wrap > div.contact-top > div.contact-aside > a.contact-direct \"https://wa.me/5528920036176?text=Ol%C3%A\""
+    ]
+   },
+   {
+    "check": "section-height",
+    "where": "footer#contato \"O próximo passoVamos colocarsua ideia no\"",
+    "msg": "the section's content does not fit it: its lowest content ends 856px below its top, past 820px (the section less 80px of bottom padding) (SR-2)",
+    "fix": "fit the content above the section's bottom padding (--padb), or make it two screens (.g2) in two groups",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-height"
+    ],
+    "wheres": [
+     "footer#contato \"O próximo passoVamos colocarsua ideia no\""
+    ]
+   },
+   {
+    "check": "section-air",
+    "where": "section#estudio > div.wrap > div.services \"01Sites de marcaSites institucionais e l\"",
+    "msg": "a top border across 100% of the container, between the section's content: sections and their parts are told apart by air and ground, not lines (SR-3)",
+    "fix": "take the rule out: sections and their parts are parted by their ground and the air between them",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "section-air"
+    ],
+    "wheres": [
+     "section#estudio > div.wrap > div.services \"01Sites de marcaSites institucionais e l\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "main#inicio > section.hero.hero--split > div.wrap.hero-inner \"Estúdio de design + desenvolvimento Site\"",
+    "msg": "the hero's .wrap holds 3 children, 0 of them .hero-text: one .hero-text and at most one strip (SR-6)",
+    "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "main#inicio > section.hero.hero--split > div.wrap.hero-inner \"Estúdio de design + desenvolvimento Site\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "footer#contato > div.wrap \"O próximo passoVamos colocarsua ideia no\"",
+    "msg": "footer.closing > .wrap holds 3 children: exactly two (the call, then the legal row) (SR-6)",
+    "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "footer#contato > div.wrap \"O próximo passoVamos colocarsua ideia no\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "canvas#brand-canvas \"Símbolo 3D da untold. Arraste ou use as \"",
+    "msg": "\"Símbolo 3D da untold. Arraste ou\" runs 694-1428px, outside the container lines of section 1 at 64-1376px: full width is for background layers and grounds only (SR-6)",
+    "fix": "keep it inside the container lines (.wrap): full width is for background layers and grounds only",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "canvas#brand-canvas \"Símbolo 3D da untold. Arraste ou use as \""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "div.wrap > div.section-heading.studio-heading > div.studio-intro > p:nth-of-type(1) \"Antes de abrir uma aba, abrimos uma conv\"",
+    "msg": "2 text blocks start on a left line at x 916, 852px from the container's left: text starts on the container's left, or on one split line (x 621, 732, 843) (also \"Entendemos sua marca, desenhamos\") (SR-6)",
+    "fix": "start the text on the container's left, or on the one split line every split shares",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "div.wrap > div.section-heading.studio-heading > div.studio-intro > p:nth-of-type(1) \"Antes de abrir uma aba, abrimos uma conv\""
+    ]
+   },
+   {
+    "check": "container-edges",
+    "where": "section#processo > div.wrap.process-grid > ol.process-steps > li:nth-of-type(1) \"01DireçãoUma conversa sobre sua marca, s\"",
+    "msg": "3 text blocks start on a left line at x 792, 728px from the container's left: text starts on the container's left, or on one split line (x 621, 732, 843) (also \"02DesignEstrutura, conteúdo e id\", \"03Código e publicaçãoConstruímos\") (SR-6)",
+    "fix": "start the text on the container's left, or on the one split line every split shares",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "container-edges"
+    ],
+    "wheres": [
+     "section#processo > div.wrap.process-grid > ol.process-steps > li:nth-of-type(1) \"01DireçãoUma conversa sobre sua marca, s\""
+    ]
+   },
+   {
+    "check": "row-lines",
+    "where": "canvas#brand-canvas \"Símbolo 3D da untold. Arraste ou use as \"",
+    "msg": "\"Símbolo 3D da untold. Arraste ou\" ends at 1428px, past the container's right line at 1376px (SR-7)",
+    "fix": "end it at the container's right line",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "row-lines"
+    ],
+    "wheres": [
+     "canvas#brand-canvas \"Símbolo 3D da untold. Arraste ou use as \""
+    ]
+   },
+   {
+    "check": "split-pair",
+    "where": "section#laboratorio > div.wrap > div.section-heading.lab-heading \"Pesquisa em movimentoNosso laboratóriodi\"",
+    "msg": "the two columns of the split start 153px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
+    "fix": "top-align both columns of the split (align-items: start)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "split-pair"
+    ],
+    "wheres": [
+     "section#laboratorio > div.wrap > div.section-heading.lab-heading \"Pesquisa em movimentoNosso laboratóriodi\""
+    ]
+   },
+   {
+    "check": "split-pair",
+    "where": "section#estudio > div.wrap > div.section-heading.studio-heading \"O estúdioUma presençacom a suaassinatura\"",
+    "msg": "the two columns of the split start 106px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
+    "fix": "top-align both columns of the split (align-items: start)",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "split-pair"
+    ],
+    "wheres": [
+     "section#estudio > div.wrap > div.section-heading.studio-heading \"O estúdioUma presençacom a suaassinatura\""
+    ]
+   },
+   {
+    "check": "split-pair",
+    "where": "section#processo > div.wrap.process-grid \"Como trabalhamosDa ideiaao ar.Um process\"",
+    "msg": "the split's columns are off the page's one pair of lines: its right column starts at x 792, the first split's at 916; its right column starts at x 792, on none of the split lines 621 (k=5), 732 (k=6), 843 (k=7) (SR-8)",
+    "fix": "start every split's right column on one shared line (wrap.left + k x (width + 24) / 12, k 5, 6 or 7; 6 on a place page) and end the left one 24px before it",
+    "widths": [
+     1440
+    ],
+    "from": "consistency",
+    "ids": [
+     "split-pair"
+    ],
+    "wheres": [
+     "section#processo > div.wrap.process-grid \"Como trabalhamosDa ideiaao ar.Um process\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#estudio p \"Antes de abrir uma aba, abrimos \"",
+    "msg": "starts at x 915.9; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#estudio p \"Antes de abrir uma aba, abrimos \""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#estudio p \"Entendemos sua marca, desenhamos\"",
+    "msg": "starts at x 915.9; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#estudio p \"Entendemos sua marca, desenhamos\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#estudio h3 \"Sites de marca\"",
+    "msg": "starts at x 148.1; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#estudio h3 \"Sites de marca\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#estudio p \"Sites institucionais e landing p\"",
+    "msg": "starts at x 735.9; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#estudio p \"Sites institucionais e landing p\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#estudio h3 \"Experiências interativas\"",
+    "msg": "starts at x 148.1; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#estudio h3 \"Experiências interativas\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#estudio p \"Movimento, interação e 3D que co\"",
+    "msg": "starts at x 735.9; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#estudio p \"Movimento, interação e 3D que co\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#estudio h3 \"Do design ao código\"",
+    "msg": "starts at x 148.1; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#estudio h3 \"Do design ao código\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#estudio p \"Da primeira estrutura aos último\"",
+    "msg": "starts at x 735.9; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#estudio p \"Da primeira estrutura aos último\""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#laboratorio p \"Experimentos próprios em forma, \"",
+    "msg": "starts at x 983.8; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#laboratorio p \"Experimentos próprios em forma, \""
+    ]
+   },
+   {
+    "check": "edge-left",
+    "where": "#processo ol.process-steps \"01DireçãoUma conversa sobre sua \"",
+    "msg": "starts at x 792; the lines are 64.1 and the column starts",
+    "fix": "start it on the .wrap left line",
+    "widths": [
+     1440
+    ],
+    "from": "layout",
+    "ids": [
+     "edge-left"
+    ],
+    "wheres": [
+     "#processo ol.process-steps \"01DireçãoUma conversa sobre sua \""
+    ]
+   },
+   {
+    "check": "hero-lines",
+    "where": "section.hero h1",
+    "msg": "the check fills the h1 to 45 characters (this hero's maxChars in heroes.json), not the page's own: it takes 4 lines at 1440, 3 at most",
+    "fix": "the check fills the h1 to this hero's maxChars, not your own: take the next type pairing the deal printed (start.mjs); when the h1 is final and fits, waive it (target: section.hero h1)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "hero-lines"
+    ],
+    "wheres": [
+     "section.hero h1"
+    ]
+   },
+   {
+    "check": "hero-fold",
+    "where": "section.hero.hero--split section.hero.hero--split \"Estúdio de design + desenvolvime\"",
+    "msg": "ends at y 966, past the fold (844): 1.14 screens tall",
+    "fix": "the hero fills the first screen alone, its button inside it",
+    "widths": [
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "hero-fold"
+    ],
+    "wheres": [
+     "section.hero.hero--split section.hero.hero--split \"Estúdio de design + desenvolvime\""
+    ]
+   },
+   {
+    "check": "hero-maxchars",
+    "where": "section.hero.hero--split section.hero.hero--split \"Estúdio de design + desenvolvime\"",
+    "msg": "with a 45-character h1 (heroes.json maxChars): ends at y 1019, past the fold (844): 1.21 screens tall",
+    "fix": "shorten the h1 or give the hero room for the longest headline",
+    "widths": [
+     390
+    ],
+    "from": "layout",
+    "ids": [
+     "hero-maxchars"
+    ],
+    "wheres": [
+     "section.hero.hero--split section.hero.hero--split \"Estúdio de design + desenvolvime\""
+    ]
+   }
+  ],
+  "warns": [
+   {
+    "check": "scroll-reveal",
+    "where": "section#processo > div.wrap.process-grid > div.process-statement > p.mo-wh \"Um processo que conecta o que sua marca \"",
+    "msg": "starts \"color\" (0.2 s) the moment it is scrolled into view (an IntersectionObserver) on span.mo-w:nth-of-type(1) (inside a dealt moment's section, [data-moment]: an enter moment is expected on every kind; its still is judged under reduced motion)",
+    "fix": "show it at rest: no fade, rise or unmask when it is scrolled into view",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-buttons",
+    "where": "header.nav.nav--centre > div.wrap.nav-inner > div.nav-actions > button.btn.btn--primary \"Conte sua ideia\"",
+    "msg": "\"Conte sua ideia\" does not start with a verb (book, buy, try, start, get, see...)",
+    "fix": "label buttons with a verb and what the visitor gets (\"Book a room\", \"Start free trial\")",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "col-edge",
+    "where": "section#processo > div.wrap.process-grid > ol.process-steps \"01 Direção Uma conversa sobre sua marca,\"",
+    "msg": "the second column starts at 3 places: 792px (section#processo), 916px (section#estudio), 984px (section#laboratorio)",
+    "fix": "start the second column of every split on the same one or two grid columns",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "section-gaps",
+    "where": "main#inicio > section.hero.hero--split / section#estudio",
+    "msg": "uneven space at the edge of a band: 44px outside its edge, 138px inside it (the space on either side of a change of ground reads as one gap only when the two match)",
+    "fix": "use one gap between sections (all within 25% of each other)",
+    "widths": [
+     1440,
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "links",
+    "where": "dialog#menu-dialog > nav > a:nth-of-type(4) \"Contato04\"",
+    "msg": "\"Contato04\" goes to #contato, in the footer",
+    "fix": "point every link at a real section, page or file",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "header.nav.nav--centre > div.wrap.nav-inner > nav.desktop-nav > a:nth-of-type(1) \"Estúdio\"",
+    "msg": "\"Estúdio\" opens a section headed \"Uma presença com a sua assinatura.\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-labels",
+    "where": "header.nav.nav--centre > div.wrap.nav-inner > nav.desktop-nav > a:nth-of-type(3) \"Processo\"",
+    "msg": "\"Processo\" opens a section headed \"Da ideia ao ar.\"",
+    "fix": "name each nav link after the heading of the section it opens",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "nav-current",
+    "where": "header.nav.nav--centre",
+    "msg": "the nav stays on screen with 3 links to the page's sections, but never marks the one you are in (no link changes as the page scrolls)",
+    "fix": "mark the link of the section on screen (a colour, a weight or a line under it) as the visitor scrolls",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-caption",
+    "where": "section.hero.hero--split > div.wrap.hero-inner > div.hero-foot > span.hero-foot-note \"Uma ideia merece um lugar no mundo.\"",
+    "msg": "a muted 12px line of 1 row sits 2px under the picture mark-sculpture.svg: it reads as a caption: \"Uma ideia merece um lugar no mundo.\"; no caption or description under any image, render or visual (house rule)",
+    "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-caption",
+    "where": "div#hero-visual > div.stage-toolbar > span.drag-hint \"Arraste para girar\"",
+    "msg": "a small 13px line is laid over the lower half of the picture mark-sculpture.svg: \"Arraste para girar\"; no caption or description under any image, render or visual (house rule)",
+    "fix": "take the line away: no caption or description under, over or on any image, render or visual; a licence credit goes in one footer line",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "div.studies > button.study-card.card:nth-of-type(2) > span.study-visual > img.experiment-poster \"picture forma.svg\"",
+    "msg": "the picture forma.svg is nearly empty at 1440px: 4 colours in its 642x406px, 88.4% one colour (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "visual-empty",
+    "where": "div.studies > button.study-card.card:nth-of-type(2) > span.study-visual > canvas \"canvas\"",
+    "msg": "the canvas is nearly empty at 1440px: 4 colours in its 642x406px, 88.4% one colour (a thin line drawing or a logo can be this plain: look at it)",
+    "fix": "make the visual draw at this width: a picture that loads, an effect that renders, or its still fallback; never an empty ground or frame",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "skip-link",
+    "where": "header.nav.nav--centre > div.wrap.nav-inner > a.skip-link:nth-of-type(1) \"Pular para o conteúdo\"",
+    "msg": "the first Tab stop is \"Pular para o conteúdo\", not a skip link: a keyboard user tabs through the whole nav on every visit",
+    "fix": "add the starter's skip link as the header's first child: <a class=\"skip-link\" href=\"#top\">Skip to content</a>",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "action-repeat",
+    "where": "header.nav.nav--centre > div.wrap.nav-inner > div.nav-actions > button.btn.btn--primary:nth-of-type(1) \"conte sua ideia\"",
+    "msg": "\"conte sua ideia\" shows 2 times on the first screen at 1440px (nav, hero): the nav's button and the hero's; nothing else on the screen may repeat it",
+    "fix": "show the action once a screen besides the nav's button: the hero's, the close's or the phone bar's, never all at once",
+    "widths": [
+     1440
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "tap-size",
+    "where": "footer#contato > div.wrap > div.footer-bottom > button.text-button \"Pausar movimento Ⅱ\"",
+    "msg": "a 135x42px tap target: under the 44px a phone needs",
+    "fix": "make every link and control outside running text 44px tall on a phone: display: inline-flex; align-items: center; min-height: 44px (a footer list then needs no gap), a 44px small button, or a transparent ::before laid past the box",
+    "widths": [
+     390,
+     320
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "right-edge",
+    "where": "div#hero-visual > div.stage-halo",
+    "msg": "its right edge stops 15px short of the content's right edge (366px), which button.btn.btn--primary reaches",
+    "fix": "end it on the content's right edge, like the other blocks of its section",
+    "widths": [
+     390
+    ],
+    "from": "consistency"
+   },
+   {
+    "check": "copy-numbered",
+    "msg": "10 step numbers",
+    "fix": "number only steps that happen in order (references/copy-tells.md)",
+    "widths": [],
+    "from": "copy",
+    "where": "(the copy)",
+    "exact": false
+   },
+   {
+    "check": "copy-eyebrows",
+    "msg": "6 eyebrow or kicker labels",
+    "fix": "one or two a page; a heading that names the thing needs no label over it (references/copy-tells.md)",
+    "widths": [],
+    "from": "copy",
+    "where": "(the copy)",
+    "exact": false
+   }
+  ],
+  "crashed": [],
+  "seconds": {
+   "consistency": 137,
+   "layout": 20
+  }
+ },
+ "open": [
+  {
+   "check": "copy-fact",
+   "where": "h1#hero-h \"Sites para o seu próximo capítulo.\"",
+   "msg": "the first screen holds no number, price, date, place, platform or genre",
+   "fix": "put one hard fact from the brief on the first screen: a number, a price, a date, the place, the platforms it runs on or a game's genre; take it from the brief or remove the claim",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "copy-fact"
+   ],
+   "wheres": [
+    "h1#hero-h \"Sites para o seu próximo capítulo.\""
+   ]
+  },
+  {
+   "check": "copy-headings",
+   "where": "h2#studio-h \"Uma presença com a sua assinatura.\"",
+   "msg": "\"Uma presença com a sua assinatura.\" names no product, part, place or section (6 headings like it; at most one brand line per page) (and 5 more like it: \"Experiências interativas\", \"Nosso laboratório digita\", \"Da ideia ao ar.\", \"Direção\", ...)",
+   "fix": "name the thing in every heading: the product, a part, the place or a section noun",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "copy-headings"
+   ],
+   "wheres": [
+    "h2#studio-h \"Uma presença com a sua assinatura.\""
+   ]
+  },
+  {
+   "check": "section-height",
+   "where": "footer#contato \"O próximo passoVamos colocarsua ideia no\"",
+   "msg": "the section's content does not fit it: its lowest content ends 856px below its top, past 820px (the section less 80px of bottom padding) (SR-2)",
+   "fix": "fit the content above the section's bottom padding (--padb), or make it two screens (.g2) in two groups",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-height"
+   ],
+   "wheres": [
+    "footer#contato \"O próximo passoVamos colocarsua ideia no\""
+   ]
+  },
+  {
+   "check": "section-air",
+   "where": "section#estudio > div.wrap > div.services \"01Sites de marcaSites institucionais e l\"",
+   "msg": "a top border across 100% of the container, between the section's content: sections and their parts are told apart by air and ground, not lines (SR-3)",
+   "fix": "take the rule out: sections and their parts are parted by their ground and the air between them",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "section-air"
+   ],
+   "wheres": [
+    "section#estudio > div.wrap > div.services \"01Sites de marcaSites institucionais e l\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "main#inicio > section.hero.hero--split > div.wrap.hero-inner \"Estúdio de design + desenvolvimento Site\"",
+   "msg": "the hero's .wrap holds 3 children, 0 of them .hero-text: one .hero-text and at most one strip (SR-6)",
+   "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "main#inicio > section.hero.hero--split > div.wrap.hero-inner \"Estúdio de design + desenvolvimento Site\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "footer#contato > div.wrap \"O próximo passoVamos colocarsua ideia no\"",
+   "msg": "footer.closing > .wrap holds 3 children: exactly two (the call, then the legal row) (SR-6)",
+   "fix": "build the page as header.nav, a main of sections (each one in-flow .wrap plus background layers) and footer.closing",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "footer#contato > div.wrap \"O próximo passoVamos colocarsua ideia no\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "canvas#brand-canvas \"Símbolo 3D da untold. Arraste ou use as \"",
+   "msg": "\"Símbolo 3D da untold. Arraste ou\" runs 694-1428px, outside the container lines of section 1 at 64-1376px: full width is for background layers and grounds only (SR-6)",
+   "fix": "keep it inside the container lines (.wrap): full width is for background layers and grounds only",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "canvas#brand-canvas \"Símbolo 3D da untold. Arraste ou use as \""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "div.wrap > div.section-heading.studio-heading > div.studio-intro > p:nth-of-type(1) \"Antes de abrir uma aba, abrimos uma conv\"",
+   "msg": "2 text blocks start on a left line at x 916, 852px from the container's left: text starts on the container's left, or on one split line (x 621, 732, 843) (also \"Entendemos sua marca, desenhamos\") (SR-6)",
+   "fix": "start the text on the container's left, or on the one split line every split shares",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "div.wrap > div.section-heading.studio-heading > div.studio-intro > p:nth-of-type(1) \"Antes de abrir uma aba, abrimos uma conv\""
+   ]
+  },
+  {
+   "check": "container-edges",
+   "where": "section#processo > div.wrap.process-grid > ol.process-steps > li:nth-of-type(1) \"01DireçãoUma conversa sobre sua marca, s\"",
+   "msg": "3 text blocks start on a left line at x 792, 728px from the container's left: text starts on the container's left, or on one split line (x 621, 732, 843) (also \"02DesignEstrutura, conteúdo e id\", \"03Código e publicaçãoConstruímos\") (SR-6)",
+   "fix": "start the text on the container's left, or on the one split line every split shares",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "container-edges"
+   ],
+   "wheres": [
+    "section#processo > div.wrap.process-grid > ol.process-steps > li:nth-of-type(1) \"01DireçãoUma conversa sobre sua marca, s\""
+   ]
+  },
+  {
+   "check": "row-lines",
+   "where": "canvas#brand-canvas \"Símbolo 3D da untold. Arraste ou use as \"",
+   "msg": "\"Símbolo 3D da untold. Arraste ou\" ends at 1428px, past the container's right line at 1376px (SR-7)",
+   "fix": "end it at the container's right line",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "row-lines"
+   ],
+   "wheres": [
+    "canvas#brand-canvas \"Símbolo 3D da untold. Arraste ou use as \""
+   ]
+  },
+  {
+   "check": "split-pair",
+   "where": "section#laboratorio > div.wrap > div.section-heading.lab-heading \"Pesquisa em movimentoNosso laboratóriodi\"",
+   "msg": "the two columns of the split start 153px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
+   "fix": "top-align both columns of the split (align-items: start)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "split-pair"
+   ],
+   "wheres": [
+    "section#laboratorio > div.wrap > div.section-heading.lab-heading \"Pesquisa em movimentoNosso laboratóriodi\""
+   ]
+  },
+  {
+   "check": "split-pair",
+   "where": "section#estudio > div.wrap > div.section-heading.studio-heading \"O estúdioUma presençacom a suaassinatura\"",
+   "msg": "the two columns of the split start 106px apart at the top: a split's columns are top-aligned, 8px either way (SR-8)",
+   "fix": "top-align both columns of the split (align-items: start)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "split-pair"
+   ],
+   "wheres": [
+    "section#estudio > div.wrap > div.section-heading.studio-heading \"O estúdioUma presençacom a suaassinatura\""
+   ]
+  },
+  {
+   "check": "split-pair",
+   "where": "section#processo > div.wrap.process-grid \"Como trabalhamosDa ideiaao ar.Um process\"",
+   "msg": "the split's columns are off the page's one pair of lines: its right column starts at x 792, the first split's at 916; its right column starts at x 792, on none of the split lines 621 (k=5), 732 (k=6), 843 (k=7) (SR-8)",
+   "fix": "start every split's right column on one shared line (wrap.left + k x (width + 24) / 12, k 5, 6 or 7; 6 on a place page) and end the left one 24px before it",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "split-pair"
+   ],
+   "wheres": [
+    "section#processo > div.wrap.process-grid \"Como trabalhamosDa ideiaao ar.Um process\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#estudio p \"Antes de abrir uma aba, abrimos \"",
+   "msg": "starts at x 915.9; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#estudio p \"Antes de abrir uma aba, abrimos \""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#estudio p \"Entendemos sua marca, desenhamos\"",
+   "msg": "starts at x 915.9; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#estudio p \"Entendemos sua marca, desenhamos\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#estudio h3 \"Sites de marca\"",
+   "msg": "starts at x 148.1; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#estudio h3 \"Sites de marca\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#estudio p \"Sites institucionais e landing p\"",
+   "msg": "starts at x 735.9; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#estudio p \"Sites institucionais e landing p\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#estudio h3 \"Experiências interativas\"",
+   "msg": "starts at x 148.1; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#estudio h3 \"Experiências interativas\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#estudio p \"Movimento, interação e 3D que co\"",
+   "msg": "starts at x 735.9; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#estudio p \"Movimento, interação e 3D que co\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#estudio h3 \"Do design ao código\"",
+   "msg": "starts at x 148.1; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#estudio h3 \"Do design ao código\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#estudio p \"Da primeira estrutura aos último\"",
+   "msg": "starts at x 735.9; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#estudio p \"Da primeira estrutura aos último\""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#laboratorio p \"Experimentos próprios em forma, \"",
+   "msg": "starts at x 983.8; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#laboratorio p \"Experimentos próprios em forma, \""
+   ]
+  },
+  {
+   "check": "edge-left",
+   "where": "#processo ol.process-steps \"01DireçãoUma conversa sobre sua \"",
+   "msg": "starts at x 792; the lines are 64.1 and the column starts",
+   "fix": "start it on the .wrap left line",
+   "widths": [
+    1440
+   ],
+   "from": "layout",
+   "ids": [
+    "edge-left"
+   ],
+   "wheres": [
+    "#processo ol.process-steps \"01DireçãoUma conversa sobre sua \""
+   ]
+  },
+  {
+   "check": "hero-lines",
+   "where": "section.hero h1",
+   "msg": "the check fills the h1 to 45 characters (this hero's maxChars in heroes.json), not the page's own: it takes 4 lines at 1440, 3 at most",
+   "fix": "the check fills the h1 to this hero's maxChars, not your own: take the next type pairing the deal printed (start.mjs); when the h1 is final and fits, waive it (target: section.hero h1)",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "hero-lines"
+   ],
+   "wheres": [
+    "section.hero h1"
+   ]
+  },
+  {
+   "check": "hero-fold",
+   "where": "section.hero.hero--split section.hero.hero--split \"Estúdio de design + desenvolvime\"",
+   "msg": "ends at y 966, past the fold (844): 1.14 screens tall",
+   "fix": "the hero fills the first screen alone, its button inside it",
+   "widths": [
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "hero-fold"
+   ],
+   "wheres": [
+    "section.hero.hero--split section.hero.hero--split \"Estúdio de design + desenvolvime\""
+   ]
+  },
+  {
+   "check": "hero-maxchars",
+   "where": "section.hero.hero--split section.hero.hero--split \"Estúdio de design + desenvolvime\"",
+   "msg": "with a 45-character h1 (heroes.json maxChars): ends at y 1019, past the fold (844): 1.21 screens tall",
+   "fix": "shorten the h1 or give the hero room for the longest headline",
+   "widths": [
+    390
+   ],
+   "from": "layout",
+   "ids": [
+    "hero-maxchars"
+   ],
+   "wheres": [
+    "section.hero.hero--split section.hero.hero--split \"Estúdio de design + desenvolvime\""
+   ]
+  }
+ ],
+ "waived": [
+  {
+   "check": "shader-lint",
+   "where": "assets/chunk-WACE3XCP.js \"sampler3D\"",
+   "msg": "a shader uses \"sampler3D\" as a name (line 2: uniform highp sampler3D probesSH[ NUM_LIGHT_PROBE_GRIDS ];): GLSL ES reserves it, so a strict GPU rejects the whole shader and the picture stays empty",
+   "fix": "rename it (flat, smooth, centroid, sample, patch, input, output, filter and the rest are GLSL ES reserved words)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "shader-lint"
+   ],
+   "wheres": [
+    "assets/chunk-WACE3XCP.js \"sampler3D\""
+   ],
+   "reason": "False positive in the installed Three.js library: sampler3D is a GLSL ES 3 sampler type, not an identifier declared by this project. The physical material renders in the browser tests."
+  },
+  {
+   "check": "shader-lint",
+   "where": "assets/chunk-WACE3XCP.js \"sampler2DShadow\"",
+   "msg": "a shader uses \"sampler2DShadow\" as a name (line 11: uniform sampler2DShadow sunShadowMap[ NUM_SUN_LIGHT_SHADOWS ];): GLSL ES reserves it, so a strict GPU rejects the whole shader and the picture stays empty",
+   "fix": "rename it (flat, smooth, centroid, sample, patch, input, output, filter and the rest are GLSL ES reserved words)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "shader-lint"
+   ],
+   "wheres": [
+    "assets/chunk-WACE3XCP.js \"sampler2DShadow\""
+   ],
+   "reason": "False positive in the installed Three.js library: sampler2DShadow is a valid GLSL ES 3 sampler type, not the name of a variable. No custom GLSL is authored here."
+  },
+  {
+   "check": "shader-lint",
+   "where": "assets/chunk-WACE3XCP.js \"common\"",
+   "msg": "a shader uses \"common\" as a name (line 2: #include <common>): GLSL ES reserves it, so a strict GPU rejects the whole shader and the picture stays empty",
+   "fix": "rename it (flat, smooth, centroid, sample, patch, input, output, filter and the rest are GLSL ES reserved words)",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "shader-lint"
+   ],
+   "wheres": [
+    "assets/chunk-WACE3XCP.js \"common\""
+   ],
+   "reason": "Three.js #include <common> is a shader chunk directive resolved by the renderer before GPU compilation, not a variable called common. Renaming vendor chunks would break the library."
+  },
+  {
+   "check": "no-visual",
+   "where": "section#estudio \"Uma presença com a sua assinatura.\"",
+   "msg": "no picture, effect or mock in this section; a feature section needs a visual",
+   "fix": "give the section a visual: a UI fragment on a ground, real icons, or a photograph that fits",
+   "widths": [
+    1440,
+    390
+   ],
+   "from": "consistency",
+   "ids": [
+    "no-visual"
+   ],
+   "wheres": [
+    "section#estudio \"Uma presença com a sua assinatura.\""
+   ],
+   "reason": "The approved direction uses an intentionally typographic services section with the client's actual symbol, between a large brand sculpture and three working original experiments. Adding stock imagery would misrepresent the studio's work."
+  },
+  {
+   "check": "phone-number",
+   "where": "div.wrap > div.contact-top > div.contact-aside > a.contact-direct \"https://wa.me/5528920036176?text=Ol%C3%A\"",
+   "msg": "a WhatsApp link calls a number in a real dialable format: \"https://wa.me/5528920036176?text=Ol%C3%A\"; a visitor can dial it and reach a stranger (and 1 more like it: div.wrap > div.footer-bottom > nav.footer-socials > a:nth-of-type(3))",
+   "fix": "drop the number and its tel: link (a \"Request a call\" form may stand in), unless the brief gives the number",
+   "widths": [
+    1440
+   ],
+   "from": "consistency",
+   "ids": [
+    "phone-number"
+   ],
+   "wheres": [
+    "div.wrap > div.contact-top > div.contact-aside > a.contact-direct \"https://wa.me/5528920036176?text=Ol%C3%A\""
+   ],
+   "reason": "The user explicitly instructed us to obtain the real business contact from untold.com.br. Both WhatsApp links use the exact number published by that official source, not an invented stranger's number."
+  }
+ ],
+ "warnCount": 18,
+ "at": "2026-11-15T11:56:52.206Z",
+ "openTold": true
+}

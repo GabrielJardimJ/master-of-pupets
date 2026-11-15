@@ -1,0 +1,7 @@
+[
+  {"check":"shader-lint","target":"\"sampler3D\"","reason":"False positive in the installed Three.js library: sampler3D is a GLSL ES 3 sampler type, not an identifier declared by this project. The physical material renders in the browser tests."},
+  {"check":"shader-lint","target":"\"sampler2DShadow\"","reason":"False positive in the installed Three.js library: sampler2DShadow is a valid GLSL ES 3 sampler type, not the name of a variable. No custom GLSL is authored here."},
+  {"check":"shader-lint","target":"\"common\"","reason":"Three.js #include <common> is a shader chunk directive resolved by the renderer before GPU compilation, not a variable called common. Renaming vendor chunks would break the library."},
+  {"check":"phone-number","target":"div.contact-aside > a.contact-direct","reason":"The user explicitly instructed us to obtain the real business contact from untold.com.br. Both WhatsApp links use the exact number published by that official source, not an invented stranger's number."},
+  {"check":"no-visual","target":"section#estudio","reason":"The approved direction uses an intentionally typographic services section with the client's actual symbol, between a large brand sculpture and three working original experiments. Adding stock imagery would misrepresent the studio's work."}
+]

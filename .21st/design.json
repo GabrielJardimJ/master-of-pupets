@@ -1,0 +1,9 @@
+{
+  "version": 1,
+  "project": {"name":"untold", "productType":"digital design and website development studio", "stack":["HTML","CSS","JavaScript","Three.js","esbuild"]},
+  "sources": {"tokens":["../untold/design-tokens.json"],"assets":["../untold/logos","../untold/fonts"],"components":[],"instructions":[]},
+  "design": {"colorMode":"dark","colors":{"background":"#0B0D0C","foreground":"#F3F2EC","accent":"#D7FF3F","secondary":"#A5AC9E"},"typography":{"display":"Outfit","body":"Outfit","mono":"IBM Plex Mono"},"spacing":{"base":8},"radius":{"control":8,"panel":16},"motion":{"hover":160,"reveal":700,"ease":[0.22,1,0.36,1]},"density":"editorial"},
+  "components":{"installed":[],"preferredPrimitives":["native dialog","native details","semantic links and buttons"],"patterns":["large type","custom sculptural 3D brand mark","interactive studies"]},
+  "constraints":{"must":["Preserve approved untold identity","Portuguese copy","No invented customers or metrics","Reduced-motion and WebGL fallback"],"avoid":["generic SaaS feature cards","stock agency photographs","scroll-jacking","fake form success"]},
+  "decisions":["Continue the approved original identity with the custom interrupted-U mark.","Use a real Three.js extrusion of the mark with physical materials and pointer interaction.","Show original studio experiments instead of fictional client projects.","21st catalog lookup was attempted but authentication is unavailable; use the supplied brand and original components."]
+}

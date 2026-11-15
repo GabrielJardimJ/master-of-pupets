@@ -1,0 +1,11 @@
+Service: untold designs and develops websites. The approved identity and reference studios make this a technology-led creative service.
+Direction: approved Ink/Paper/Volt, Outfit + IBM Plex Mono; original chrome interrupted-U object, editorial hero, open service rows, large interactive studies, typographic process, large wordmark close.
+Source of truth: ../untold/design-tokens.json and approved identity boards.
+Voice: clear, curious and direct; conversational Brazilian Portuguese; concrete deliverables, no invented proof or deadlines.
+Facts: brand is untold; the startup makes websites; all portfolio visuals are original experiments, not customer work. No prices, awards, staff identities, addresses or customer metrics are invented or reproduced in this concept.
+Primary action: Conte sua ideia. WhatsApp +55 28 92003-6176, untold344@gmail.com and Instagram untold_wd were confirmed in the user-supplied official site https://untold.com.br/. The visitor reviews and sends the prepared message in WhatsApp; the site never claims delivery.
+Screens: hero 1H (live brand object); studio 1H (services); lab 2H (three original interactive studies); process 1H (type moment and actual steps); contact/footer 1H.
+Motion: single hero entrance; slow live mark and direct manipulation with pause; pointer-led lab visuals; process word-highlight moment. Everything remains visible under reduced motion and without WebGL.
+Overrides: preserve user's approved own typography, logo, palette and editorial composition over random taste-kit dealers. The studio's own technology visuals serve the user's explicit premium interactive reference direction.
+21st: design context initialized, catalog search attempted; not signed in. No retrieved 21st component code used.
+Publication: owner-private Sites preview, source and artifacts retained locally.
