@@ -1,12 +1,14 @@
 import { build } from 'esbuild';
 import { mkdir, cp, readFile, writeFile, rm } from 'node:fs/promises';
 import { resolve, sep, basename, dirname } from 'node:path';
+import {buildPages} from './pages.mjs';
 const root=process.cwd();
 const output=resolve(root,'dist');
 if(!output.startsWith(root+sep)||basename(output)!=='dist')throw new Error('Unsafe build output path');
 await rm(output,{recursive:true,force:true});
 await mkdir('dist',{recursive:true});
 await cp('public','dist',{recursive:true,filter:source=>!(basename(dirname(source))==='motion'&&['demo.html','_hover-test.html','meta.json'].includes(basename(source)))});
+await buildPages();
 const result=await build({entryPoints:['src/app.js'],outdir:'dist/assets',bundle:true,format:'esm',splitting:true,minify:true,sourcemap:false,target:['es2022'],entryNames:'app',chunkNames:'chunk-[hash]',metafile:true});
 await mkdir('.openai/local',{recursive:true});
 await writeFile('.openai/local/build-meta.json',JSON.stringify(result.metafile,null,2));

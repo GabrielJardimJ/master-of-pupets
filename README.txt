@@ -1,52 +1,56 @@
 untold — Site do estúdio
 
-HTML, CSS e JavaScript, com Three.js para a escultura original da marca.
-As fontes, símbolos e cores vêm da identidade aprovada neste projeto.
-
 RODAR
 npm install
 npm run build
 npm run dev
-Abra o endereço Local impresso pelo servidor.
+Abra http://127.0.0.1:5173/.
 
-ESTRUTURA
-public/             HTML, estilos e arquivos próprios da marca
-src/scene.js        Objeto 3D, luzes, rotação e fallback
-src/experiments.js  Estudos interativos Campo, Forma e Ritmo
-src/app.js          Navegação, diálogos, movimento e briefing
-dist/               Site pronto para hospedar
-.openai/hosting.json Identidade da publicação Sites
+PÁGINAS
+/                Início
+/estudio.html    Estúdio e serviços
+/projetos.html   Área de projetos, ainda sem projetos publicados
+/processo.html   Direção, design, código e publicação
+/contato.html    WhatsApp, e-mail e convite para preparar um briefing
+
+EDIÇÃO
+public/index.html       Início, navegação, rodapé e diálogo de contato
+src/pages/*.html        Conteúdo das páginas internas
+scripts/pages.mjs       Montagem das páginas e metadados
+public/styles.css       Estilos compartilhados e responsivos
+src/scene.js            Escultura 3D estática, renderizada ao carregar e redimensionar
+src/app.js              Menu, contato e carregamento da escultura
+public/contact.json     Configuração do formulário de contato
+
+As páginas internas reutilizam as seções correspondentes do início, além de
+seu conteúdo próprio. Altere os trechos {{estudio}}, {{projetos}} e {{processo}}
+em public/index.html. Execute npm run build após editar qualquer fonte.
+O servidor local serve dist/, que contém o site pronto para hospedar.
 
 CONTATO
-Contatos confirmados no site oficial https://untold.com.br/ em 15/11/2026:
-WhatsApp: +55 28 92003-6176. E-mail: untold344@gmail.com.
-O formulário prepara um briefing e abre a conversa no WhatsApp correto.
-O visitante revisa e confirma o envio pelo próprio WhatsApp.
-Há e-mail como alternativa e a opção de baixar o briefing.
+WhatsApp configurado: +55 28 92003-6176.
+E-mail: untold344@gmail.com. Instagram: untold_wd.
+O formulário prepara um briefing e abre o WhatsApp. O visitante revisa e
+confirma o envio no próprio serviço. O briefing também pode ser baixado.
+Ao trocar o contato comercial, atualize public/contact.json e os links
+comerciais em public/index.html e src/pages/contato.html.
 
-Para trocar o contato comercial, atualize public/contact.json:
-{"email":"seu endereço comercial real","whatsapp":null}
-ou {"email":null,"whatsapp":"seu número comercial com país e DDD"}.
-Depois execute npm run build e publique a nova versão.
-O site abre um rascunho no aplicativo de e-mail ou a conversa no WhatsApp;
-o visitante confirma o envio no serviço escolhido.
+VISUAL E ACESSO
+Identidade original da pasta ../untold: Ink #0B0D0C, Paper #F3F2EC,
+Volt #D7FF3F, Outfit e IBM Plex Mono. Serviços seguem as mesmas colunas
+do título e da introdução. A escultura não gira, não reage ao mouse e não
+tem controles de pausa. Celulares, movimento reduzido e falhas de WebGL
+usam a arte vetorial estática. Menu e briefing usam dialog nativo.
+A área de projetos apresenta um estado vazio e um link real para o WhatsApp.
 
-EXPERIMENTOS
-São estudos originais do estúdio, não clientes ou trabalhos comerciais inventados.
-As três experiências têm endereço compartilhável com ?experimento=campo,
-?experimento=forma ou ?experimento=ritmo. ?contato=1 abre o briefing.
+VERIFICAR
+npm run check
+npm test (com o servidor local em execução)
+O teste usa Edge isolado e intercepta o contato: nenhuma mensagem é enviada.
+Capturas e resultados são gravados em qa/.
 
-MOVIMENTO E ACESSO
-Há controle de pausa, preferência de movimento reduzido e imagens vetoriais
-de fallback. O objeto 3D usa uma única superfície WebGL, sem biblioteca de
-rolagem. As animações são reduzidas em celulares e telas com toque.
-Menu e experiências usam o elemento dialog com teclado e Escape.
-
-FONTES E CÓDIGO DE APOIO
+CRÉDITOS
 Outfit e IBM Plex Mono: licenças OFL em public/assets/fonts.
-Three.js: dependência MIT. Camadas de microinteração e word-highlight
-adaptadas ao sistema da marca a partir do taste-skill instalado no ambiente.
-O catálogo 21st foi consultado; não havia autenticação para recuperar componentes.
-
-As referências de direção foram Active Theory, Lusion, Raycast e Spline.
-O código, a marca, o objeto e os experimentos são próprios deste projeto.
+Three.js: MIT. Microinterações e word-highlight adaptados do taste-skill.
+O catálogo 21st foi consultado, mas o CLI não conseguiu acessar o registro
+de pacotes. Os componentes e recursos originais do projeto foram reutilizados.

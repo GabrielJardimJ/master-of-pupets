@@ -6,7 +6,8 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "dev": "node scripts/dev.mjs",
-    "check": "node --check src/app.js && node --check src/scene.js && node --check src/experiments.js"
+    "check": "node --check src/app.js && node --check src/scene.js && node --check scripts/pages.mjs",
+    "test": "node scripts/test-site.mjs"
   },
   "dependencies": {
     "three": "0.187.0"
