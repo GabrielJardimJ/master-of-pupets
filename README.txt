@@ -27,6 +27,13 @@ seu conteúdo próprio. Altere os trechos {{estudio}}, {{projetos}} e {{processo
 em public/index.html. Execute npm run build após editar qualquer fonte.
 O servidor local serve dist/, que contém o site pronto para hospedar.
 
+VERCEL
+vercel.json define o build como npm run build e a saída como dist/.
+As páginas internas e assets/app.js são gerados durante o build e não
+existem na pasta public/. Publicar public/ causa erro 404 nesses arquivos.
+As URLs mantêm a extensão .html, conforme os links da navegação.
+O push para a main do repositório conectado dispara a publicação automática.
+
 CONTATO
 WhatsApp configurado: +55 28 92003-6176.
 E-mail: untold344@gmail.com. Instagram: untold_wd.

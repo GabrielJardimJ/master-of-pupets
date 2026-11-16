@@ -4,3 +4,4 @@ dist/
 qa/
 *.tar.gz
 .openai/local/
+.playwright-mcp/
